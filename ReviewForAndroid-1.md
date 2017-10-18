@@ -39,4 +39,12 @@
 因为非 **Activity** 类型的 **Context** 并没有所谓的 任务栈 ， 解决方法 是为 待启动 的 **Activity** 指定  
 <font size = 4 color = blue>`FLAG_ACTIVITY_NEW_TASK` </font> 标记位，这样启动 **Activity** 时会创建一个新的任务栈，本质以 **singleTask** 模式启动.
 
+**3**.在 **singleTop** （栈顶复用模式中），**Activity** 不会被重新创建，会调用 **onNewIntent()** .  
+
+**4**.在 **singleTask** （栈内复用模式中），该模式下的 **Activity** 请求启动后，系统首先会寻找是否存在该 Acitivity 想要的任务栈，如果不存在，就重新创建一个任务栈，然后把该 **Activity** 的实例放在栈中，如果存在需要的任务栈，这时需要看该 **Activity** 的实例在栈中是否存在，存在的话就会调用该 **Activity** 的 **onNewIntent()**.  
+
+**5**. **singleTask** 默认具有 **clearTop** 的效果 ，例:栈 **S1** 中 **Activity** 实例有 **ADBC** ，**D** 需要栈 **S1**，以 **singleTask** 启动，最终栈 **S1** 中 **Activity** 实例为 **AD**.  
+
+**6**. **singleInstance** （单实例模式），一种加强的 **singleTask**， 系统会为该模式下的 **Activity** 建一个新的任务栈 ，并独立存在栈中，除非这个独特的任务栈被系统销毁，不然不会创建新的 **Activity**.
+
   
