@@ -15,9 +15,9 @@
 **5**. **View** 和 **Activity** 同样具有  **onSaveInstanceState()** 和  **onRestoreInstanceState()** ,关于保存和恢复 **View** 的层次结构 ： 委托思想.  
 
 **6**. **Activity** 优先级一般分为3种:  
-	(1)前台 **Activity** ：正在和用户交互，优先级最高.  
-	(2)可见但非前台 **Activity** .  
-	(3)后台 **Activity** ：执行了 **onStop()** 优先级最低.  
+(1)前台 **Activity** ：正在和用户交互，优先级最高.  
+(2)可见但非前台 **Activity** .  
+(3)后台 **Activity** ：执行了 **onStop()** 优先级最低.  
 	
 当系统内存不足时，系统会按照上述优先级杀死目标 **Activity** 所在的 **进程**，脱离四大组件的进程很快被系统杀死，后台工作放入 **Service** 从而保证进程具有一定的优先级.
 	
@@ -45,6 +45,21 @@
 
 **5**. **singleTask** 默认具有 **clearTop** 的效果 ，例:栈 **S1** 中 **Activity** 实例有 **ADBC** ，**D** 需要栈 **S1**，以 **singleTask** 启动，最终栈 **S1** 中 **Activity** 实例为 **AD**.  
 
-**6**. **singleInstance** （单实例模式），一种加强的 **singleTask**， 系统会为该模式下的 **Activity** 建一个新的任务栈 ，并独立存在栈中，除非这个独特的任务栈被系统销毁，不然不会创建新的 **Activity**.
+**6**. **singleInstance** （单实例模式），一种加强的 **singleTask**， 系统会为该模式下的 **Activity** 建一个新的任务栈 ，并独立存在栈中，除非这个独特的任务栈被系统销毁，不然不会创建新的 **Activity**.  
 
+**7**.  **TaskAffinity**：任务相关性. 这个参数标识了一个 **Activity** 所需要任务栈的名字，默认情况下，所有 **Activity** 所需的任务栈的名字为应用包名. **TaskAffinity** 属性主要和 **singleTask** 启动模式 或者 **allowTaskReparenting** 属性配对使用，而任务栈分为前台任务栈和后台任务栈 ， 后台任务栈中的 **Activity** 位于暂停状态，用户可以通过切换将后台任务栈再次调到前台.
+
+**8**.两种 **Activity** 的启动模式：  
+(1)通过 **AndroidMenifest** 为 **Activity** 指定启动模式：  
+
+<font size = 4 color = blue> `android:launchMode="singleTask"` </font>  
+
+(2)通过在 **Intent** 中设置标志位为 **Activity** 指定启动模式：   
+
+<font size = 4 color = blue> `Intent intent = new Intent();` </font>  
+<font size = 4 color = blue> `intent.setClass(this,PieActivity.class);` </font>  
+<font size = 4 color = blue> `intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);` </font>   
+<font size = 4 color = blue> `startActivity(intent);` </font>   
+                 
+优先级上，第二种方式高于第一种，限定范围不一样，第一种无法直接为 **Actvity** 设定 <font size = 4 color = blue>`FLAG_ACTIVITY_CLEAR_TOP` </font> 标识，第二种方式无法为 **Activity** 指定 **singleInstance** 模式.
   
