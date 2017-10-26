@@ -58,8 +58,20 @@
 
 <font size = 4 color = blue> `Intent intent = new Intent();` </font>  
 <font size = 4 color = blue> `intent.setClass(this,PieActivity.class);` </font>  
-<font size = 4 color = blue> `intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);` </font>   
+<font size = 4 color = blue> `intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);` </font>   
 <font size = 4 color = blue> `startActivity(intent);` </font>   
                  
 优先级上，第二种方式高于第一种，限定范围不一样，第一种无法直接为 **Actvity** 设定 <font size = 4 color = blue>`FLAG_ACTIVITY_CLEAR_TOP` </font> 标识，第二种方式无法为 **Activity** 指定 **singleInstance** 模式.
+***  
+###IntentFilter的匹配规则  
+
+**1**.启动 **Activity** 分为两种：**显示调用** 和 **隐式调用** :  
+**显示调用** : 明确指定被启动对象的组件信息，包括 **包名** 和 **类名**.  
+**隐式调用** : 需要 **Intent** 能够匹配目标组件的 **IntentFilter** 中所设置的过滤信息，如果不匹配则将无法启动目标 **Activity**， **IntentFilter** 中的过滤信息有 **action** ， **category** ，**data**.  
+两者共存的情况下以显示调用为主，为了匹配过滤列表，需要同时匹配过滤列表中的 **action** ， **category** ， **data** 信息 ，否则匹配失败 . 一个 **Activity** 中可以有多个 **intent**-**filter** ，一个 **Intent** 只要能匹配任何一组 **intent-filter** 即可成功启动对应的 **Activity** .  
+
+**2**. (1) **action** 的匹配规则：
+
+
+
   
