@@ -70,7 +70,13 @@
 **隐式调用** : 需要 **Intent** 能够匹配目标组件的 **IntentFilter** 中所设置的过滤信息，如果不匹配则将无法启动目标 **Activity**， **IntentFilter** 中的过滤信息有 **action** ， **category** ，**data**.  
 两者共存的情况下以显示调用为主，为了匹配过滤列表，需要同时匹配过滤列表中的 **action** ， **category** ， **data** 信息 ，否则匹配失败 . 一个 **Activity** 中可以有多个 **intent**-**filter** ，一个 **Intent** 只要能匹配任何一组 **intent-filter** 即可成功启动对应的 **Activity** .  
 
-**2**. (1) **action** 的匹配规则：
+**2**. (1) **action** 的匹配规则：  
+**action** 的匹配要求Intent 中的 **action** 存在且必须和过滤规则中的其中一个 **action** 相同，这里说的匹配是指 **action** 的字符串值完全一样 ，**action** 区分大小写.  
+(2) **category** 的匹配规则：  
+ **category** 要求 **Intent** 可以没有 **category**，如果一旦 **Intent** 中有 **category** ，不管有几个 **category** ，每个都要和过滤规则中对应的 **category** 相同.系统在调用 **startActivity()** 或者 **startActivityForResult()** 的时候会默认为 Intent 加上 <font size = 4 color = blue>`android.intent.category.DEFAULT` </font>这个 **category** .  
+ (3) **data** 的匹配规则： 
+ 如果过滤规则中定义了 **data** ，那么 **Intent** 中必须也要定义可匹配的 **data**，和 **action** 类似.  
+ **data** 由 两部分组成，**mineType** 和 **URI**, **mineType** 指媒体类型. **data** 匹配较为复杂，详情见**《Android开发艺术探索》- 任玉刚 - p31**.
 
 
 
