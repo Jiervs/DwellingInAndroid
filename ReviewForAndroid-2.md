@@ -45,4 +45,6 @@
 ( **Binder** 机制较为复杂 ,详情见**《Android开发艺术探索》- 任玉刚 - p47 - p61**   )  
 **Binder** 实现了 **IBinder** 接口，从 **Android** 应用层来说，**Binder** 是客户端和服务端进行通信的媒介，当 **bindService** 的时候，服务端会返回一个包含了服务端业务调用的 **Binder** 对象，通过这个 **Binder** 对象，客户端就可以获取服务端提供的服务或者数据，这里服务包括普通服务和基于 **AIDL** 的服务.  **Binder** 的工作机制：  
 
-![Alt text]([https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/binder.png](https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/binder.png))
+<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/binder.png" width = 500 />  
+
+
