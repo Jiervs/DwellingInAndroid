@@ -47,4 +47,15 @@
 
 <img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/binder.png" width = 500 />  
 
+***
+### **Android** 中的 **IPC** 方式  
+**1**. 使用 **Bundle**：当我们在一个进程中启动了另一个进程的 **Activity** ， **Service** 和 **Receiver** ，我们就可以在 **Bundle** 中附加我们需要传输给远程进程的信息并通过 **Intent** 发送出去.   
 
+**2**.使用文件共享：两个进程通过读/写同一个文件来交换数据. **Android** 系统基于 **Linux** ，使得并发读/写文件没有限制地进行，会产生并发问题.文件共享方式适合在对数据同步要求不高的进程之间进行通信 , 不建议在多进程通信中使用 **SharePreferences**.   
+
+**3**.使用 **Messenger**：一种轻量级的 **IPC** 方式，底层实现是 **AIDL**，同时，由于它一次处理一个请求，因此在服务端不用考虑线程同步的问题， 具体使用步骤 ,详情见 **《Android开发艺术探索》- 任玉刚 - p65 - p70** ， **Messenger** 的工作原理：   
+<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/messenger.png" width = 500 />  
+
+**4**.使用 **AIDL** ：**Android开发艺术探索》- 任玉刚 - p71 - p90** (深入了解还是挺费脑的...)   
+
+**5**.使用 **ContentProvider** ：
