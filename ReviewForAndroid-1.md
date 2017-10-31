@@ -1,8 +1,8 @@
-#Review For Android
+# Review For Android
 ***
-##Activity
+## Activity
 ***
-###生命周期
+### 生命周期
 
 **1**.虽然 **onStart()** 和 **onResume()** 都表示 **Activity** 已经可见，但是 **onStart()** 的时候 **Activity** 还在后台， **onResume()** 的时候 **Activity** 才会显示到前台.  
 
@@ -28,7 +28,7 @@
 之后系统不调用  **onSaveInstanceState()** 和  **onRestoreInstanceState()** ，而是调用 **onConfigurationChanged()** .  
 ***
 
-###启动模式
+### 启动模式
 
 **1**.4种 **LauchMode** ：(1) **standard**  (2) **singleTop**  (3) **singleTask**  (4) **singleInstance** .  
 
@@ -63,7 +63,7 @@
                  
 优先级上，第二种方式高于第一种，限定范围不一样，第一种无法直接为 **Actvity** 设定 <font size = 4 color = blue>`FLAG_ACTIVITY_CLEAR_TOP` </font> 标识，第二种方式无法为 **Activity** 指定 **singleInstance** 模式.
 ***  
-###IntentFilter的匹配规则  
+### IntentFilter的匹配规则  
 
 **1**.启动 **Activity** 分为两种：**显示调用** 和 **隐式调用** :  
 **显示调用** : 明确指定被启动对象的组件信息，包括 **包名** 和 **类名**.  

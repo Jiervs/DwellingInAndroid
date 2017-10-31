@@ -1,11 +1,11 @@
-#Review For Android
+# Review For Android
 ***
-##IPC机制 (Inter-Process Communication)
+## IPC机制 (Inter-Process Communication)
 ***
-###Android IPC 简介   
+### Android IPC 简介   
 按照操作系统中的描述，**线程**是 **CPU** 调度的最小单元，**线程** 是一种有限的系统资源 .  而 **进程** 一般指一个执行单元，在 **PC** 和移动设备上指一个程序或者一个应用.一个**进程**可以包含多个 **线程** . 在 **Android** 里面主线程也叫 **Ui** 线程，在 **Ui** 线程才能操作界面元素，当在主线程中执行耗时操作则会造成界面无法响应，即 **ANR** (**Application Not Responding**) ,应用无响应.
 ***
-###Android 中的多进程模式
+### Android 中的多进程模式
 
 **1**.**Android** 中多进程是指一个应用中存在多个进程的情况（这里暂不讨论两个应用之间的多进程情况）. 在 **Android** 中使用多进程只有一种方法：就是给四大组件在 **AndroidMenifest** 中指定 <font size = 4 color = blue>`android:process` </font> 属性.（还有一种非常规方法，详情见**《Android开发艺术探索》- 任玉刚 - p37**），没有指定的情况下，默认进程的进程名是包名.  
 
