@@ -56,6 +56,14 @@
 **3**.使用 **Messenger**：一种轻量级的 **IPC** 方式，底层实现是 **AIDL**，同时，由于它一次处理一个请求，因此在服务端不用考虑线程同步的问题， 具体使用步骤 ,详情见 **《Android开发艺术探索》- 任玉刚 - p65 - p70** ， **Messenger** 的工作原理：   
 <img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/messenger.png" width = 500 />  
 
-**4**.使用 **AIDL** ：**Android开发艺术探索》- 任玉刚 - p71 - p90** (深入了解还是挺费脑的...)   
+**4**.使用 **AIDL** ：**《Android开发艺术探索》- 任玉刚 - p71 - p90** (深入了解还是挺费脑的...)   
 
-**5**.使用 **ContentProvider** ：
+**5**.使用 **ContentProvider** ：是 **Android** 提供专门用于不同应用间进行数据共享的方式 ，底层实现同样也是 **Binder**， 创建自定义的 **ContentProvider** 需要继承 **ContentProvider** 并实现6个抽象方法 ：**onCreate()** , **query()** , **update()** , **insert()** , **delete()** 和 **getType()** , **getType()** 用来返回一个 **Uri** 请求对应的 **MIME** 类型 (媒体类型)，这6个方法均运行在 **ContentProvide** 的进程中，除了 **onCreate()** 由系统回调并运行在主线程中，其他方法均由外界回调并运行在 **Binder** 线程池中，关于 **ContentProvide** 的注册 ：  
+<font size = 4 color = blue>`android:name=".JiervsProvider"`</font>  
+<font size = 4 color = blue>`android:authorities="com.jiervs.javademo.provider"`</font>  
+<font size = 4 color = blue>`android:permission="com.jiervs.PROVIDER"` </font>  
+<font size = 4 color = blue>` android:process="provider"` </font>  
+
+<font size = 4 color = blue>`android:authorities`</font> 是 **ContentProvider** 的唯一标识，例如查询一个应用中图书管理数据库的实例 : **《Android开发艺术探索》- 任玉刚 - p95 - p103**.     
+
+**6**. 使用 **Socket**：
