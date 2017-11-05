@@ -62,8 +62,8 @@
 <font size = 4 color = blue>`android:name=".JiervsProvider"`</font>  
 <font size = 4 color = blue>`android:authorities="com.jiervs.javademo.provider"`</font>  
 <font size = 4 color = blue>`android:permission="com.jiervs.PROVIDER"` </font>  
-<font size = 4 color = blue>` android:process="provider"` </font>  
+<font size = 4 color = blue>` android:process=":provider"` </font>  
 
 <font size = 4 color = blue>`android:authorities`</font> 是 **ContentProvider** 的唯一标识，例如查询一个应用中图书管理数据库的实例 : **《Android开发艺术探索》- 任玉刚 - p95 - p103**.     
 
-**6**. 使用 **Socket**：
+**6**. 使用 **Socket**：**Socket** 称为“ **套接字** ”，是网络通信中的概念，它分为流式套接字和用户数据包套接字两种，分别对应于网络的传输控制层中的 **TCP** 和 **UDP** 协议，进程之间可以通过 **Socket** 来实现信息的传输，**Socket** 本身可以支持传输任意字节流. 利用 Socket 建立一个简单的聊天对话  **《Android开发艺术探索》- 任玉刚 - p104 - p111**.
