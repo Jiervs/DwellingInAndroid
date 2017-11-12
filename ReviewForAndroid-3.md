@@ -49,4 +49,6 @@
 做完上面两步，就可以有选择地实现 **OnGestureListener** 和 **OnDoubleTapListener** 中的方法了，方法含义如下图所示： 
 
 <img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/OnGestureListener%EF%BC%8COnDoubleTapListener(1).png" width = 700 />
-<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/OnGestureListener%EF%BC%8COnDoubleTapListener(2).png" width = 700 />
+<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/OnGestureListener%EF%BC%8COnDoubleTapListener(2).png" width = 700 />   
+
+**6**. **Scroller** : 弹性滑动对象 ， 使用 **View** 的 **scrollTo** / **scrollBy** 方法来进行滑动时，其过程是瞬间完成的，用户体验不好，这个时候可以用 **Scroller** 来实现有过度效果的滑动，**Scroller** 本身无法让 **View** 弹性滑动，它需要和 **View** 的 **computeScroll()** 配合使用才能共同完成这个功能 .
