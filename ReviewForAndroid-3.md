@@ -51,4 +51,15 @@
 <img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/OnGestureListener%EF%BC%8COnDoubleTapListener(1).png" width = 700 />
 <img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/OnGestureListener%EF%BC%8COnDoubleTapListener(2).png" width = 700 />   
 
-**6**. **Scroller** : 弹性滑动对象 ， 使用 **View** 的 **scrollTo** / **scrollBy** 方法来进行滑动时，其过程是瞬间完成的，用户体验不好，这个时候可以用 **Scroller** 来实现有过度效果的滑动，**Scroller** 本身无法让 **View** 弹性滑动，它需要和 **View** 的 **computeScroll()** 配合使用才能共同完成这个功能 .
+**6**. **Scroller** : 弹性滑动对象 ， 使用 **View** 的 **scrollTo** / **scrollBy** 方法来进行滑动时，其过程是瞬间完成的，用户体验不好，这个时候可以用 **Scroller** 来实现有过度效果的滑动，**Scroller** 本身无法让 **View** 弹性滑动，它需要和 **View** 的 **computeScroll()** 配合使用才能共同完成这个功能 .   
+
+***
+### View 的滑动   
+
+**1**. **View** 的滑动一般使用三种方法 :   
+1.通过 **View** 本身提供的 **scrollTo()** 和 **scrollBy()** 方法实现滑动 .   
+2.第二种是通过动画给 **View** 施加平移效果来实现滑动 .   
+3.第三种是通过改变 **View** 的 **LayoutParam** 使得 **View** 重新布局从而实现滑动 .  
+
+**2**. 使用 **scrollTo()** 和 **scrollBy()** : **scrollBy()** 本质上调用了 **scrollTo()**，**scrollTo()**是实现了基于所传递参数的绝对滑动 ， **scrollBy()** 是相对滑动，**scrollTo()** 和 **scrollBy()** 只能改变 **View 内容**的位置而不能改变 **View** 在布局中的位置，关于 **View** 内部两个属性 **mScrollX** 和 **mScrollY** 的改变规则请看下图 ：    
+<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/mScrollX_mScrollY.png" width = 450 />   
