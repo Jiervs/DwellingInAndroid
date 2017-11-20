@@ -62,4 +62,16 @@
 3.第三种是通过改变 **View** 的 **LayoutParam** 使得 **View** 重新布局从而实现滑动 .  
 
 **2**. 使用 **scrollTo()** 和 **scrollBy()** : **scrollBy()** 本质上调用了 **scrollTo()**，**scrollTo()**是实现了基于所传递参数的绝对滑动 ， **scrollBy()** 是相对滑动，**scrollTo()** 和 **scrollBy()** 只能改变 **View 内容**的位置而不能改变 **View** 在布局中的位置，关于 **View** 内部两个属性 **mScrollX** 和 **mScrollY** 的改变规则请看下图 ：    
-<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/mScrollX_mScrollY.png" width = 450 />   
+<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/mScrollX_mScrollY.png" width = 450 />  
+ 
+**3**. **使用动画** : 主要是操作 View 的 **translationX** 和 **translationY**  属性，既可以采用传统的 **View** 动画，也可以采用属性动画，**View** 动画改变的只是一种影像， **View** 的位置参数，包括宽高都不会改变，而属性动画是真实改变 **View** 的位置，但是在3.0以上才能使用（有兼容库）.   
+
+**4**.  改变布局参数，比如使一个 **Button** 向左平移100px :    
+<font size = 4 color = blue>`ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams)button.getLayoutParams();`</font>     
+<font size = 4 color = blue>`params.leftMargin += 100`</font>   
+<font size = 4 color = blue>`button.requestLayout();`</font>   
+<font size = 4 color = blue>`// 或者 button.setLayoutParams(params);`</font>   
+
+**5**. 各种滑动方式的对比 : 1. **scrollTo(),scrollBy()** 操作简单，适合对 **View** 内容滑动 ;  2.动画 : 操作简单 , 主要适用于没有交互的 **View** 和实现复杂的动画效果 ;  3. 改变布局参数 : 操作稍微复杂，适用于有交互的 **View**.   
+
+**6**.弹性滑动 : 
