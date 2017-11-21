@@ -66,7 +66,7 @@
  
 **3**. **使用动画** : 主要是操作 View 的 **translationX** 和 **translationY**  属性，既可以采用传统的 **View** 动画，也可以采用属性动画，**View** 动画改变的只是一种影像， **View** 的位置参数，包括宽高都不会改变，而属性动画是真实改变 **View** 的位置，但是在3.0以上才能使用（有兼容库）.   
 
-**4**.  改变布局参数，比如使一个 **Button** 向左平移100px :    
+**4**.  **改变布局参数** : 比如使一个 **Button** 向右平移100px :    
 <font size = 4 color = blue>`ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams)button.getLayoutParams();`</font>     
 <font size = 4 color = blue>`params.leftMargin += 100`</font>   
 <font size = 4 color = blue>`button.requestLayout();`</font>   
@@ -74,4 +74,5 @@
 
 **5**. 各种滑动方式的对比 : 1. **scrollTo(),scrollBy()** 操作简单，适合对 **View** 内容滑动 ;  2.动画 : 操作简单 , 主要适用于没有交互的 **View** 和实现复杂的动画效果 ;  3. 改变布局参数 : 操作稍微复杂，适用于有交互的 **View**.   
 
-**6**.弹性滑动 : 
+**6**.弹性滑动 : 实现弹性滑动都有一个共同的思想 : 将一次大的滑动分成若干次小的滑动并在一个时间段内完成，比如 : 通过 **Scroller** 、**Handler+postDelayed** 、**Thread+sleep**等：   
+（1）. **Scroller** : 
