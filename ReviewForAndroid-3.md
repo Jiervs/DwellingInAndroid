@@ -75,4 +75,43 @@
 **5**. 各种滑动方式的对比 : 1. **scrollTo(),scrollBy()** 操作简单，适合对 **View** 内容滑动 ;  2.动画 : 操作简单 , 主要适用于没有交互的 **View** 和实现复杂的动画效果 ;  3. 改变布局参数 : 操作稍微复杂，适用于有交互的 **View**.   
 
 **6**.弹性滑动 : 实现弹性滑动都有一个共同的思想 : 将一次大的滑动分成若干次小的滑动并在一个时间段内完成，比如 : 通过 **Scroller** 、**Handler+postDelayed** 、**Thread+sleep**等：   
-（1）. **Scroller** : 
+（1）. **Scroller** : Scroll 的典型用法 :      
+    scroller = new Scroller(context); 
+    
+    public void smoothScrollTo (int destX , int destY) {
+        int scrollX = getScrollX();
+        int deltaX = destX - scrollX;
+        //1000 ms 内滑向 destX ，效果就是慢慢滑动
+        scroller.startScroll(scrollX,0,deltaX,0,1000);
+        invalidate();
+    }
+    
+    @Override
+    public void computeScroll() {
+        if (scroller.computeScrollOffset()) {
+            scrollTo(scroller.getCurrX(),scroller.getCurrY());
+            postInvalidate();
+        }
+    }
+    
+**invalidate()** 会导致 **View** 重绘，在 **View** 的 **draw()** 中又回去调用 **computeScroll()** , **computeScroll()** 在 **View** 中是一个空实现，因此我们需要自己实现，而在上面的代码中，自己实现的  **computeScroll()** 中向 **Scroller** 获取当前的 **scrollX** , **scrollY** ，然后通过 **scrollTo** 方法实现滑动 , 接着又调用 **postInvalidate()** 来进行第二次重绘，还是会导致 **computeScroll()** 被调用 , 然后继续向 **Scroller** 获取当前的 **scrollX** 和 **scrollY** , 并通过 **scrollTo()** 滑动到新的位置 , 如此反复，直到整个滑动过程结束 .   
+
+关于弹性滑动还有 **通过动画** 和 **使用延时策略** 思想 .
+
+***
+### View 的事件分发机制
+
+**1**.当一个 **MotionEvent** 产生以后，系统需要把这个事件传递给一个具体的 **View**，期过程就是分发过程，点击事件的分发过程由3个很重要的方法共同完成 :    
+(1).<font size = 4 color = blue>`public boolean dispatchTouchEvent(MotionEvent ev)` </font>   
+用来进行事件的分发，如果事件能够传递给当前 **View** ，那么此方法一定会被调用，返回结果受当前 View 的 onTouchEvent() 和下级 View
+ 的 dispatchTouchEvent() 的影响，表示是否消耗当前事件.   
+ 
+ (2).<font size = 4 color = blue>`public boolean onInterceptTouchEvent(MotionEvent ev)` </font>   
+在上述方法内部调用 , 用来判断是否拦截某个事件 , 如果当前 **View** 拦截了某个事件 , 那么在同一个事件序列当中 , 此方法不会被再次调用 , 返回结果表示是否拦截当前事件 .   
+
+ (3).<font size = 4 color = blue>`public boolean onTouchEvent(MotionEvent ev)` </font>   
+在 **dispatchTouchEvent()** 中调用 ，用来处理点击事件，返回结果表示是否消耗当前事件，如果不消耗 , 则在同一个事件序列中，当前 **View** 无法再次接收到事件 . 
+
+以上3个方法的关系可以通过如下伪代码表示 : 
+<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/event_view.png" width = 450 /> 
+详细分析及源码 见**《Android开发艺术探索》- 任玉刚 - p142 - p154** 
