@@ -23,7 +23,66 @@
 <img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/MeasureSpec.png" width = 600 />  
 
 **4.** **View** 的 **measure** 过程 : 由 **measure()** , 该方法是个 **final** 方法,该方法会调用 **onMeasure()** 方法.   
-**ViewGroup** 的 **measure** 过程 : **ViewGroup** 是一个抽象类，没有重写 **onMeasure()** 方法,但是提供了一个叫 **measureChlidren()** 的方法，除了完成自己的 **measure** 过程外，还会遍历调用所有子元素的 measure() 方法
+**ViewGroup** 的 **measure** 过程 : **ViewGroup** 是一个抽象类，没有重写 **onMeasure()** 方法,但是提供了一个叫 **measureChlidren()** 的方法，除了完成自己的 **measure** 过程外，还会遍历调用所有子元素的 **measure()** 方法.  
+
+**5.**一个比较好的习惯是在 **onLayout()** 方法中去获取 **View** 的测量宽/高或者最终宽/高，因为 **View** 的 **measure** 过程和 **Activity** 的生命周期方法不是同步执行的，实际上在基本生命周期方法中均无法正确得到某个 **View** 的宽/高信息，这里提供4种方法来解决 :  
+(1). **Activity / View # onWindowFocusChanged**  
+**onWindowFocusChanged()** 含义 : **View** 初始化完毕，宽/高已经准备好，该方法会被调用多次，当 **Activity** 的窗口得到焦点和失去焦点时均会被调用一次，如果频繁调用 **onResume()** 和 **onPause() ** ，**onWindowFocusChanged()** 也会被频繁调用. 典型代码如下：  
+
+<font size = 3 color = blue>
+@Override  
+&nbsp; &nbsp; public void onWindowFocusChanged(boolean hasFocus) {  
+&nbsp; &nbsp;&nbsp; &nbsp;super.onWindowFocusChanged(hasFocus);  
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;if (hasFocus) {  
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;int width = iv_test.getMeasuredWidth();  
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;int height = iv_test.getMeasuredHeight();  
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;}  
+&nbsp; &nbsp;&nbsp; &nbsp;} </font> 
+
+
+(2).**view.post(runnable)**  
+通过 **post** 可以将一个 **runnable** 投递到消息队列的尾部，然后等待 **Looper** 调用此 **runnable** 的时候，**View** 也已经初始化好了.典型代码如下 :   
+
+<font size = 3 color = blue>
+@Override  
+protected void onStart() {  
+&nbsp; &nbsp;super.onStart();  
+&nbsp; &nbsp;iv_test.post(new Runnable() {  
+&nbsp; &nbsp;&nbsp; &nbsp;@Override  
+&nbsp; &nbsp;&nbsp; &nbsp;public void run() {  
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;int width = iv_test.getMeasuredWidth();  
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;int height = iv_test.getMeasuredHeight();  
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;}  
+&nbsp; &nbsp;&nbsp; &nbsp;});  
+&nbsp; &nbsp;}</font> 
+
+(3).**ViewTreeObserver**  
+当 **View** 树的状态发生改变或者 **View** 树内部的 **View** 的可见性发生改变时，**onGlobaLayout()** 方法将被回调，因此可以获取 **View** 的宽高，伴随 **View** 树的状态改变等，**onGlobalLayout()** 会被多次调用，典型代码如下 :  
+
+<font size = 3 color = blue>
+@Override  
+protected void onStart() {  
+&nbsp; &nbsp;super.onStart();  
+&nbsp; &nbsp;ViewTreeObserver observer = iv_test.getViewTreeObserver();  
+&nbsp; &nbsp;observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {  
+&nbsp; &nbsp;&nbsp; &nbsp;@Override  
+&nbsp; &nbsp;&nbsp; &nbsp;public void onGlobalLayout() {  
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;iv_test.getViewTreeObserver().removeOnGlobalLayoutListener(this);  
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;int width = iv_test.getMeasuredWidth();  
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;int height = iv_test.getMeasuredHeight();  
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;}  
+&nbsp; &nbsp;&nbsp; &nbsp;});  
+&nbsp; &nbsp;}</font> 
+
+(4).**view.measure(int widthMeasureSpec , int heightMeasureSpec)**  
+该方法较为复杂，需分情况讨论，详细分析 见 **《Android开发艺术探索》- 任玉刚 - p192**  
+
+**6.** **View** 的 **layout** 过程 : **Layout** 作用是 **ViewGroup** 用来确定子元素的位置，**layout() ** 确定 **View** 本身的位置，而 **onLayout()** 方法则会确定左右子元素的位置.
+源码导读 见 **《Android开发艺术探索》- 任玉刚 - p193 - p197**  
+
+**7.** **View** 的 **draw** 过程 : 
+
+
 
 
 
