@@ -80,7 +80,11 @@ protected void onStart() {
 **6.** **View** 的 **layout** 过程 : **Layout** 作用是 **ViewGroup** 用来确定子元素的位置，**layout() ** 确定 **View** 本身的位置，而 **onLayout()** 方法则会确定左右子元素的位置.
 源码导读 见 **《Android开发艺术探索》- 任玉刚 - p193 - p197**  
 
-**7.** **View** 的 **draw** 过程 : 
+**7.** **View** 的 **draw** 过程 :  **View** 的绘制过程遵循如下几步 :  
+(1).绘制背景 **background.draw(canvas)**.  
+(2).绘制自己 (**onDraw**).  
+(3).绘制children ( **dispatchDraw**).  
+(4).绘制装饰 (**onDrawScrollBars**)  
 
 
 
