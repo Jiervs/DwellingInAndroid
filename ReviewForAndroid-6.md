@@ -4,13 +4,13 @@
 ***
 ### 自定义 View 的分类
 
-**1.**继承 **View** 重写 **onDraw()**  
+**1.** 继承 **View** 重写 **onDraw()**  
 这种方法主要用于实现一些不规则的效果，采用这种方式需要自己支持 **wrap_content**，并且 **padding** 也需要自己处理.  
 
-**2.**继承 **ViewGroup** 派生特殊的 **Layout**  
+**2.** 继承 **ViewGroup** 派生特殊的 **Layout**  
 这种方法主要用于实现自定义的布局，需要合适得处理 **ViewGroup** 的测量，布局这两个过程 ， 并同时处理子元素的测量和布局过程.  
 
-**3.**继承特定的 **View** （比如 **TextView**） 
+**3.** 继承特定的 **View** （比如 **TextView**） 
 这种方法比较常见，一般适用于扩展某种已有的 **View** 的功能，不需要自己支持 **wrap_content** 、**padding** 等.   
 
 **4.** 继承特定的 **ViewGroup** （比如 **LinearLayout**） 
@@ -20,7 +20,7 @@
 ***
 ### 自定义 View 须知  
 
-**1.**让 **View** 支持 **wrap_content**  
+**1.** 让 **View** 支持 **wrap_content**  
 直接继承 View 或 ViewGroup 的控件 ，如果不在 onMeasure 中对 **wrap_content** 做特殊处理，那么当外界在布局中使用 **wrap_content** 无法达到预期效果.  
 
 **2.** 如果有必要，让你的 **View** 支持 **padding**  
@@ -35,4 +35,6 @@
 
 ***
 ### 自定义 View 示例   
-见 **《Android开发艺术探索》- 任玉刚 - p202 - p217**
+见 **《Android开发艺术探索》- 任玉刚 - p202 - p217**   
+
+一个完全自定义 HorizontalScrollView 的编写 ：见 **《Android开发艺术探索》- 任玉刚 - p212 - p217**   

@@ -114,4 +114,4 @@
 
 以上3个方法的关系可以通过如下伪代码表示 : 
 <img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/event_view.png" width = 450 /> 
-详细分析及源码 见**《Android开发艺术探索》- 任玉刚 - p142 - p154** 
+详细分析及源码 见 **《Android开发艺术探索》- 任玉刚 - p142 - p154** 
