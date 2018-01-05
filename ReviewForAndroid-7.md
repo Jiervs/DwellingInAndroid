@@ -21,3 +21,25 @@
 
 ***
 ### PendingIntent 概述 
+
+**1.** **PendingIntent** 表示一种处于待定、等待、即将发生状态的意图，和 **Intent** 的区别在与，**PendingIntent** 典型的使用场景是给 **RemoteView** 添加单击事件，因为 **RemoteViews** 运行在远程进程中，因此 **RemoteViews** 不同于普通的 **View** ，所以无法直接向 **View** 那样通过 **setOnClickListener** 方法来设置单击事件，要想给 **RemoteView** 设置单击事件，就必须使用 **PendingIntent** ， **PendingIntent** 通过 **send()** 和 **cancel()** 方法来发送和取消特定的待定 **Intent**.  
+  
+**2.** **PendingIntent** 支持三种待定意图 : **启动Activity** 、**启动Service** 和 **发送广播**，对应着它的三个方法接口 :   
+
+<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/PendingIntent.png" width = 600 /> 
+
+**PendingIntent** 的匹配规则为 : 如果两个 **PendingIntent** 它们内部的 **Intent** 相同并且 **requestCode** 也相同，那么这两个 **PendingIntent** 就是相同的。关于上述 **flags** 参数的含义，**flags**常用的类型有如下几种，如下所示 :  
+
+**FLAG\_ONE\_SHOT** : 当前描述的 PendingIntent 只能被使用一次，然后它就会被 **cancel()** , 如果后续还有相同的 **PendingIntent**，那么它们的 **send()** 方法就会调用失败 , 对于通知栏消息来说，如果采用次标记位，那么同类的通知只能使用一次，后续的通知单击后将无法打开.  
+  
+**FLAG\_NO\_CREATE** : 当前描述的 **PendingIntent** 不会主动创建，如果当前 **PendingIntent** 之前不存在，那么上表三个方法都会返回 **null** ，这个标记位很少见，无法单独使用，一般用不到. 
+
+**FLAG\_CANCEL\_CURRENT** : 当前描述的 PendingIntent 如果已经存在，那么它们都会被** cancel()** ,然后系统会创建一个新的 **PendingIntent**. 对于通知栏消息来说，那些被 **cancel()** 的消息单击后将无法打开.  
+
+**FLAG\_UPDATE\_CURRENT** : 当前描述的 **PendingIntent** 如果已经存在，那么它们都会被更新，即它们的 **Intent** 中的 **Extras** 会被替换成最新的 .  
+
+标记位的具体案例：具体案例 : 见 **《Android开发艺术探索》- 任玉刚 - p229 - p230**  
+
+***
+### RemoteViews 的内部机制  
+
