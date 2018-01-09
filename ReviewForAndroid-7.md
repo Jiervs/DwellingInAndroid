@@ -41,5 +41,18 @@
 标记位的具体案例：具体案例 : 见 **《Android开发艺术探索》- 任玉刚 - p229 - p230**  
 
 ***
-### RemoteViews 的内部机制  
+### **RemoteViews** 的内部机制  
+
+**1.** **RemoteViews** 最常用的构造方法 : **public RemotesViews(String packageName，int layoutId)**，两个参数分别表示 **当前应用的包名** 和 **待加载的布局文件**，**RemoteViews** 并不能支持所有的 **View** 类型，它所支持的类型如下 :  
+
+**Layout** :   
+**FrameLayout**、**LinearLayout**、**RelativeLayout**、**GridLayout**.  
+
+**View** :  
+**AnalogClock**、**Button**、**Chronometer**、**ImageButton**、**ImageView**、**ProgressBar**、**TextView**、**ViewFlipper**、**ListView**、**GridView**、**StackView**，**AdapterViewFlipper**、**ViewStub**. 
+
+除了上述 **View** 类型，**RemoteViews** 不支持其他 **View** 类型，即时是它们的子类也不行，更加无法使用自定义 **View**，**RemoteViews** 无法直接访问里面的 **View** 元素，必须通过 **RemoteViews** 所提供的一系列 **set** 方法完成，而事实上大部分的 **set**  方法的确是通过反射来完成的.  
+
+关于 **RemoteViews** 的内部机制及工作过程的具体分析 见 **《Android开发艺术探索》- 任玉刚 - p231 - p238**  
+
 
