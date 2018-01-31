@@ -29,50 +29,46 @@
 (1). **Activity / View # onWindowFocusChanged**  
 **onWindowFocusChanged()** 含义 : **View** 初始化完毕，宽/高已经准备好，该方法会被调用多次，当 **Activity** 的窗口得到焦点和失去焦点时均会被调用一次，如果频繁调用 **onResume()** 和 **onPause() ** ，**onWindowFocusChanged()** 也会被频繁调用. 典型代码如下：  
 
-<font size = 3 color = blue>
-@Override  
-&nbsp; &nbsp; public void onWindowFocusChanged(boolean hasFocus) {  
-&nbsp; &nbsp;&nbsp; &nbsp;super.onWindowFocusChanged(hasFocus);  
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;if (hasFocus) {  
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;int width = iv_test.getMeasuredWidth();  
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;int height = iv_test.getMeasuredHeight();  
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;}  
-&nbsp; &nbsp;&nbsp; &nbsp;} </font> 
-
+    @Override  
+    public void onWindowFocusChanged(boolean hasFocus) {  
+      super.onWindowFocusChanged(hasFocus);  
+        if (hasFocus) {  
+          int width = iv_test.getMeasuredWidth();  
+          int height = iv_test.getMeasuredHeight();  
+        }  
+      }  
 
 (2).**view.post(runnable)**  
 通过 **post** 可以将一个 **runnable** 投递到消息队列的尾部，然后等待 **Looper** 调用此 **runnable** 的时候，**View** 也已经初始化好了.典型代码如下 :   
 
-<font size = 3 color = blue>
-@Override  
-protected void onStart() {  
-&nbsp; &nbsp;super.onStart();  
-&nbsp; &nbsp;iv_test.post(new Runnable() {  
-&nbsp; &nbsp;&nbsp; &nbsp;@Override  
-&nbsp; &nbsp;&nbsp; &nbsp;public void run() {  
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;int width = iv_test.getMeasuredWidth();  
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;int height = iv_test.getMeasuredHeight();  
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;}  
-&nbsp; &nbsp;&nbsp; &nbsp;});  
-&nbsp; &nbsp;}</font> 
+    @Override  
+    protected void onStart() {  
+      super.onStart();  
+      iv_test.post(new Runnable() {  
+        @Override  
+        public void run() {  
+          int width = iv_test.getMeasuredWidth();  
+          int height = iv_test.getMeasuredHeight();  
+        }  
+      });  
+    }
 
 (3).**ViewTreeObserver**  
 当 **View** 树的状态发生改变或者 **View** 树内部的 **View** 的可见性发生改变时，**onGlobaLayout()** 方法将被回调，因此可以获取 **View** 的宽高，伴随 **View** 树的状态改变等，**onGlobalLayout()** 会被多次调用，典型代码如下 :  
 
-<font size = 3 color = blue>
-@Override  
-protected void onStart() {  
-&nbsp; &nbsp;super.onStart();  
-&nbsp; &nbsp;ViewTreeObserver observer = iv_test.getViewTreeObserver();  
-&nbsp; &nbsp;observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {  
-&nbsp; &nbsp;&nbsp; &nbsp;@Override  
-&nbsp; &nbsp;&nbsp; &nbsp;public void onGlobalLayout() {  
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;iv_test.getViewTreeObserver().removeOnGlobalLayoutListener(this);  
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;int width = iv_test.getMeasuredWidth();  
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;int height = iv_test.getMeasuredHeight();  
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;}  
-&nbsp; &nbsp;&nbsp; &nbsp;});  
-&nbsp; &nbsp;}</font> 
+    @Override  
+    protected void onStart() {  
+      super.onStart();  
+      ViewTreeObserver observer = iv_test.getViewTreeObserver();  
+      observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {  
+      @Override  
+      public void onGlobalLayout() {  
+        iv_test.getViewTreeObserver().removeOnGlobalLayoutListener(this);  
+        int width = iv_test.getMeasuredWidth();  
+        int height = iv_test.getMeasuredHeight();  
+        }  
+      });  
+    } 
 
 (4).**view.measure(int widthMeasureSpec , int heightMeasureSpec)**  
 该方法较为复杂，需分情况讨论，详细分析 见 **《Android开发艺术探索》- 任玉刚 - p192**  
