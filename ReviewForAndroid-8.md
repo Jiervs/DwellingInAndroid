@@ -12,8 +12,8 @@
 ***
 ### Drawable 的分类
 
-**1.** **BitmapDrawable** : 它就是表示一张图片，直接引用原始的图片即可，但是也可以通过 **XML** 的方式来描述的 **BitmapDrawable** 可以设置更多的效果，如下图所示： 
- 
+**1.** **BitmapDrawable** : 它就是表示一张图片，直接引用原始的图片即可，但是也可以通过 **XML** 的方式来描述的 **BitmapDrawable** 可以设置更多的效果，如下图所示：   
+
 <img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/BitmapDrawable.png" width = 600 /> 
 
 具体属性含义：见 **《Android开发艺术探索》- 任玉刚 - p245** 
