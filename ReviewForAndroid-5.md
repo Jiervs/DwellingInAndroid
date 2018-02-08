@@ -27,7 +27,7 @@
 
 **5.**一个比较好的习惯是在 **onLayout()** 方法中去获取 **View** 的测量宽/高或者最终宽/高，因为 **View** 的 **measure** 过程和 **Activity** 的生命周期方法不是同步执行的，实际上在基本生命周期方法中均无法正确得到某个 **View** 的宽/高信息，这里提供4种方法来解决 :  
 (1). **Activity / View # onWindowFocusChanged**  
-**onWindowFocusChanged()** 含义 : **View** 初始化完毕，宽/高已经准备好，该方法会被调用多次，当 **Activity** 的窗口得到焦点和失去焦点时均会被调用一次，如果频繁调用 **onResume()** 和 **onPause() ** ，**onWindowFocusChanged()** 也会被频繁调用. 典型代码如下：  
+**onWindowFocusChanged()** 含义 : **View** 初始化完毕，宽/高已经准备好，该方法会被调用多次，当 **Activity** 的窗口得到焦点和失去焦点时均会被调用一次，如果频繁调用 **onResume()** 和 **onPause()**， **onWindowFocusChanged()** 也会被频繁调用. 典型代码如下：  
 
     @Override  
     public void onWindowFocusChanged(boolean hasFocus) {  

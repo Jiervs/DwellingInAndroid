@@ -34,9 +34,9 @@
   
 **FLAG\_NO\_CREATE** : 当前描述的 **PendingIntent** 不会主动创建，如果当前 **PendingIntent** 之前不存在，那么上表三个方法都会返回 **null** ，这个标记位很少见，无法单独使用，一般用不到. 
 
-**FLAG\_CANCEL\_CURRENT** : 当前描述的 PendingIntent 如果已经存在，那么它们都会被** cancel()** ,然后系统会创建一个新的 **PendingIntent**. 对于通知栏消息来说，那些被 **cancel()** 的消息单击后将无法打开.  
+**FLAG\_CANCEL\_CURRENT** : 当前描述的 **PendingIntent** 如果已经存在，那么它们都会被 **cancel()** ,然后系统会创建一个新的 **PendingIntent**. 对于通知栏消息来说，那些被 **cancel()** 的消息单击后将无法打开.  
 
-**FLAG\_UPDATE\_CURRENT** : 当前描述的 **PendingIntent** 如果已经存在，那么它们都会被更新，即它们的 **Intent** 中的 **Extras** 会被替换成最新的 .  
+**FLAG\_UPDATE\_CURRENT** : 当前描述的 **PendingIntent** 如果已经存在，那么它们都会被更新，即它们的 **Intent** 中的 **Extras** 会被替换成最新的.  
 
 标记位的具体案例：具体案例 : 见 **《Android开发艺术探索》- 任玉刚 - p229 - p230**  
 
