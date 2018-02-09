@@ -9,7 +9,8 @@
 
 **3.** **Drawable** 的层次关系如下图所示： 
 
-<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/Drawable_%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB.png" width = 600 />    
+<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/Drawable_%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB.png" width = 600 />   
+ 
 ***
 ### Drawable 的分类
 
