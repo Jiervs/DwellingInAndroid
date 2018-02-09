@@ -8,6 +8,7 @@
 **2.** **Drawable** 的内部宽／高这个参数比较重要，通过 **getInrinsicWidth()** 和 **getIntrisicHeight()** 获得，一张图片所形成的 **Drawable** ，它的内部宽高就是图片的宽高，但是一个颜色所形成的 **Drawable** 没有内部宽高的概念，也没有大小概念。  
 
 **3.** **Drawable** 的层次关系如下图所示： 
+
 <img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/Drawable_%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB.png" width = 600 />    
 ***
 ### Drawable 的分类
@@ -26,7 +27,7 @@
 
 具体属性含义：见 **《Android开发艺术探索》- 任玉刚 - p248 - p251** 
 
-**3.** 
+**3.** 更多非常用 **Drawable** 请查阅 **《Android开发艺术探索》- 任玉刚 6.2章节**
 
 
    
