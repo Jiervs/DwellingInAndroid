@@ -143,7 +143,7 @@
 
 属性动画要求对象属性有set()方法，get()方法可选插值器和估值算法我们可以自定义，具体一点插值器需要实现 Interpolator 或者 TimeInterpolator,自定义估值算法需要实现 TypeEvaluator，对其他类型（非int,float,Color）做动画，就需要自定义类型估值算法。  
 
-属性动画的监听器 ：AnimatorListener ，AnimatorUpdateListener。
+属性动画的监听器 ：AnimatorListener ，AnimatorUpdateListener。 
 
 **4.** 对任意属性做动画 及 工作原理（见 《Android开发艺术探索》- 任玉刚 - p282 - p293）
 	
