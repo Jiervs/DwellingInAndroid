@@ -26,7 +26,7 @@
   
 **2.** **PendingIntent** 支持三种待定意图 : **启动Activity** 、**启动Service** 和 **发送广播**，对应着它的三个方法接口 :   
 
-<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/PendingIntent.png" width = 600 /> 
+<img src = "resource/PendingIntent.png" width = 500 /> 
 
 **PendingIntent** 的匹配规则为 : 如果两个 **PendingIntent** 它们内部的 **Intent** 相同并且 **requestCode** 也相同，那么这两个 **PendingIntent** 就是相同的。关于上述 **flags** 参数的含义，**flags**常用的类型有如下几种，如下所示 :  
 

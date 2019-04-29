@@ -8,7 +8,7 @@
 1.**外部滑动方向** 和 **内部滑动方向** 不一致.  
 2.**外部滑动方向** 和 **内部滑动方向** 一致.  
 3.上面两种情况嵌套   
-<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/confict_of_view.png" width = 600 />  
+<img src = "resource/confict_of_view.png" width = 600 />  
 
 场景一：**ViewPager** 和 **Fragment** 的配合使用，而每个页面的内部往往又是一个 **ListView** ，而 **ViewPager** 内部处理了这种滑动冲突，而如果是 **ScrollView** ，那就需要手动处理滑动冲突了.  
 

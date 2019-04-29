@@ -22,8 +22,10 @@
 当系统内存不足时，系统会按照上述优先级杀死目标 **Activity** 所在的 **进程**，脱离四大组件的进程很快被系统杀死，后台工作放入 **Service** 从而保证进程具有一定的优先级.
 	
 **7**.如果不想系统在系统配置发生改变后重新创建 **Activity** ，可以给 **Activity** 指定 **configChanges** 属性，例：  
-
-<font size = 4 color = blue>`android:configChanges="orientation"`</font>  
+ 
+```java
+android:configChanges="orientation"
+```
 
 之后系统不调用  **onSaveInstanceState()** 和  **onRestoreInstanceState()** ，而是调用 **onConfigurationChanged()** .  
 ***
@@ -50,27 +52,33 @@
 **7**.  **TaskAffinity**：任务相关性. 这个参数标识了一个 **Activity** 所需要任务栈的名字，默认情况下，所有 **Activity** 所需的任务栈的名字为应用包名. **TaskAffinity** 属性主要和 **singleTask** 启动模式 或者 **allowTaskReparenting** 属性配对使用，而任务栈分为前台任务栈和后台任务栈 ， 后台任务栈中的 **Activity** 位于暂停状态，用户可以通过切换将后台任务栈再次调到前台.
 
 **8**.两种 **Activity** 的启动模式：  
-(1)通过 **AndroidMenifest** 为 **Activity** 指定启动模式：  
+(1)通过 **AndroidMenifest** 为 **Activity** 指定启动模式：
+  
+```java
+android:launchMode="singleTask"
+``` 
 
-<font size = 4 color = blue> `android:launchMode="singleTask"` </font>  
+(2)通过在 **Intent** 中设置标志位为 **Activity** 指定启动模式：
 
-(2)通过在 **Intent** 中设置标志位为 **Activity** 指定启动模式：   
-
-<font size = 4 color = blue> `Intent intent = new Intent();` </font>  
-<font size = 4 color = blue> `intent.setClass(this,PieActivity.class);` </font>  
-<font size = 4 color = blue> `intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);` </font>   
-<font size = 4 color = blue> `startActivity(intent);` </font>   
-                 
+```java
+Intent intent = new Intent();
+intent.setClass(this,PieActivity.class);
+intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+startActivity(intent);
+```               
 优先级上，第二种方式高于第一种，限定范围不一样，第一种无法直接为 **Actvity** 设定 <font size = 4 color = blue>`FLAG_ACTIVITY_CLEAR_TOP` </font> 标识，第二种方式无法为 **Activity** 指定 **singleInstance** 模式.
 ***  
+
 ### IntentFilter的匹配规则  
 
-**1**.启动 **Activity** 分为两种：**显示调用** 和 **隐式调用** :  
+**一**:   
+启动 **Activity** 分为两种：**显示调用** 和 **隐式调用** :  
 **显示调用** : 明确指定被启动对象的组件信息，包括 **包名** 和 **类名**.  
 **隐式调用** : 需要 **Intent** 能够匹配目标组件的 **IntentFilter** 中所设置的过滤信息，如果不匹配则将无法启动目标 **Activity**， **IntentFilter** 中的过滤信息有 **action** ， **category** ，**data**.  
 两者共存的情况下以显示调用为主，为了匹配过滤列表，需要同时匹配过滤列表中的 **action** ， **category** ， **data** 信息 ，否则匹配失败 . 一个 **Activity** 中可以有多个 **intent**-**filter** ，一个 **Intent** 只要能匹配任何一组 **intent-filter** 即可成功启动对应的 **Activity** .  
 
-**2**. (1) **action** 的匹配规则：  
+**二**:  
+(1) **action** 的匹配规则：  
 **action** 的匹配要求Intent 中的 **action** 存在且必须和过滤规则中的其中一个 **action** 相同，这里说的匹配是指 **action** 的字符串值完全一样 ，**action** 区分大小写.  
 (2) **category** 的匹配规则：  
  **category** 要求 **Intent** 可以没有 **category**，如果一旦 **Intent** 中有 **category** ，不管有几个 **category** ，每个都要和过滤规则中对应的 **category** 相同.系统在调用 **startActivity()** 或者 **startActivityForResult()** 的时候会默认为 Intent 加上 <font size = 4 color = blue>`android.intent.category.DEFAULT` </font>这个 **category** .  

@@ -9,22 +9,22 @@
 
 **3.** **Drawable** 的层次关系如下图所示： 
 
-<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/Drawable_%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB.png" width = 600 />   
+<img src = "resource/Drawable_%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB.png" width = 500 />   
  
 ***
 ### Drawable 的分类
 
 **1.** **BitmapDrawable** : 它就是表示一张图片，直接引用原始的图片即可，但是也可以通过 **XML** 的方式来描述的 **BitmapDrawable** 可以设置更多的效果，如下图所示：   
 
-<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/BitmapDrawable.png" width = 600 /> 
+<img src = "resource/BitmapDrawable.png" width = 500 /> 
 
 具体属性含义：见 **《Android开发艺术探索》- 任玉刚 - p245** 
 
 **2.** **ShapeDrawable** ：理解为通过颜色来构造的图形，它既可以是纯色的图形，也可以是具有渐变效果的图形，具体语法如下所示 ： 
 
-<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/ShapeDrawable_1.png" width = 600 />  
+<img src = "resource/ShapeDrawable_1.png" width = 500 />  
 
-<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/ShapeDrawable_2.png" width = 500 />  
+<img src = "resource/ShapeDrawable_2.png" width = 400 />  
 
 具体属性含义：见 **《Android开发艺术探索》- 任玉刚 - p248 - p251** 
 

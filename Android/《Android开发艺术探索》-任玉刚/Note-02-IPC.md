@@ -22,18 +22,29 @@
 ***
 ### **IPC** 的基础概念
 **1**. **Serializeble** 是 **Java** 所提供的一个序列化接口，使用 **Serializeble** 方式进行序列化只需要在类的声明中指定一个类似下面的标识即可自动实现默认的序列化过程：  
-<font size = 3 color = blue>`private static final long serialVersionUID = 876512345634128908L` </font>  
+
+```java
+private static final long serialVersionUID = 876512345634128908L
+```  
 对对象的序列化和反序列化只需要采用 **ObjectOutputStream** 和 **ObjectInputStream** 即可轻松实现，如下：  
-**序列化过程** ：  
-    User user = new User("Jiervs",1);  
-    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("cache.txt"));   
-    out.writeObject(user);  
-    out.close();   
+**序列化过程** ： 
+
+```java 
+User user = new User("Jiervs",1);  
+ObjectOutputStream out = 
+	new ObjectOutputStream(new FileOutputStream("cache.txt"));   
+out.writeObject(user);  
+out.close();  
+```
     
 **反序列化过程** ：  
-    ObjectInputStream in = new ObjectInputStream(new FileInputStream("cache.txt"));  
-    User userNew = (User) in.readObject();   
-    in.close(); 
+
+```java 
+ObjectInputStream in = 
+	new ObjectInputStream(new FileInputStream("cache.txt"));  
+User userNew = (User) in.readObject();   
+in.close();  
+```
     
 静态成员变量属于类不属于对象，所以不会参与序列化过程，其次可以用 **transient** 关键字标记成员变量不参与序列化过程.
 
@@ -45,7 +56,7 @@
 ( **Binder** 机制较为复杂 ,详情见**《Android开发艺术探索》- 任玉刚 - p47 - p61**   )  
 **Binder** 实现了 **IBinder** 接口，从 **Android** 应用层来说，**Binder** 是客户端和服务端进行通信的媒介，当 **bindService** 的时候，服务端会返回一个包含了服务端业务调用的 **Binder** 对象，通过这个 **Binder** 对象，客户端就可以获取服务端提供的服务或者数据，这里服务包括普通服务和基于 **AIDL** 的服务.  **Binder** 的工作机制：  
 
-<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/binder.png" width = 500 />  
+<img src ="resource/binder.png" width = 500 />  
 
 ***
 ### **Android** 中的 **IPC** 方式  
@@ -54,19 +65,22 @@
 **2**.使用文件共享：两个进程通过读/写同一个文件来交换数据. **Android** 系统基于 **Linux** ，使得并发读/写文件没有限制地进行，会产生并发问题.文件共享方式适合在对数据同步要求不高的进程之间进行通信 , 不建议在多进程通信中使用 **SharePreferences**.   
 
 **3**.使用 **Messenger**：一种轻量级的 **IPC** 方式，底层实现是 **AIDL**，同时，由于它一次处理一个请求，因此在服务端不用考虑线程同步的问题， 具体使用步骤 ,详情见 **《Android开发艺术探索》- 任玉刚 - p65 - p70** ， **Messenger** 的工作原理：   
-<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/messenger.png" width = 500 />  
+
+<img src ="resource//messenger.png" width = 500/>  
 
 **4**.使用 **AIDL** ：**《Android开发艺术探索》- 任玉刚 - p71 - p90** (深入了解还是挺费脑的...)   
 
 **5**.使用 **ContentProvider** ：是 **Android** 提供专门用于不同应用间进行数据共享的方式 ，底层实现同样也是 **Binder**， 创建自定义的 **ContentProvider** 需要继承 **ContentProvider** 并实现6个抽象方法 ：**onCreate()** , **query()** , **update()** , **insert()** , **delete()** 和 **getType()** , **getType()** 用来返回一个 **Uri** 请求对应的 **MIME** 类型 (媒体类型)，这6个方法均运行在 **ContentProvide** 的进程中，除了 **onCreate()** 由系统回调并运行在主线程中，其他方法均由外界回调并运行在 **Binder** 线程池中，关于 **ContentProvide** 的注册 ：  
-<font size = 4 color = blue>`android:name=".JiervsProvider"`</font>  
-<font size = 4 color = blue>`android:authorities="com.jiervs.javademo.provider"`</font>  
-<font size = 4 color = blue>`android:permission="com.jiervs.PROVIDER"` </font>  
-<font size = 4 color = blue>` android:process=":provider"` </font>  
 
+```java
+android:name=".JiervsProvider"
+android:authorities="com.jiervs.javademo.provider"
+android:permission="com.jiervs.PROVIDER"
+android:process=":provider"
+``` 
 <font size = 4 color = blue>`android:authorities`</font> 是 **ContentProvider** 的唯一标识，例如查询一个应用中图书管理数据库的实例 : **《Android开发艺术探索》- 任玉刚 - p95 - p103**.     
 
 **6**. 使用 **Socket**：**Socket** 称为“ **套接字** ”，是网络通信中的概念，它分为流式套接字和用户数据包套接字两种，分别对应于网络的传输控制层中的 **TCP** 和 **UDP** 协议，进程之间可以通过 **Socket** 来实现信息的传输，**Socket** 本身可以支持传输任意字节流. 利用 Socket 建立一个简单的聊天对话  **《Android开发艺术探索》- 任玉刚 - p104 - p111**.   
 
 **7**. 建议使用合适的 **IPC** 方式： 
-<img src = "https://raw.githubusercontent.com/Jiervs/RepsitoryResource/master/Dwelling-in-the-past/IPC%E5%9C%BA%E6%99%AF.png" width = 800 />  
+<img src = "resource/IPC%E5%9C%BA%E6%99%AF.png" width = 800 />  
